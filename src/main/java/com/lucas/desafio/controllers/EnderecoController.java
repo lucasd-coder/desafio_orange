@@ -1,6 +1,5 @@
 package com.lucas.desafio.controllers;
 
-
 import java.net.URI;
 
 import javax.validation.Valid;
@@ -14,31 +13,48 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.lucas.desafio.dto.UserDTO;
-import com.lucas.desafio.entities.User;
+import com.lucas.desafio.dto.EnderecoDTO;
+import com.lucas.desafio.entities.Endereco;
+import com.lucas.desafio.service.EnderecoService;
 import com.lucas.desafio.service.UsersService;
 
-
 @RestController
-@RequestMapping(value = "/users")
-public class UsersController {
-	
+@RequestMapping(value="/enderecos")
+public class EnderecoController {
 	
 	@Autowired
-	private UsersService service;
+	private EnderecoService service;
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<User> find(@PathVariable Long id) {
-		User obj = service.find(id);
-		return ResponseEntity.ok().body(obj);
-	}
+	@Autowired
+	private UsersService usersService;
+		 	
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody UserDTO objDto) {
-		User obj = service.froDTO(objDto);
+	@RequestMapping(value = "/{id}", method=RequestMethod.POST)
+	public ResponseEntity<Endereco> insert(@Valid @RequestBody EnderecoDTO objDto, @PathVariable Long id) {
+		Endereco obj = service.fromDTO(objDto);
+		obj.setUser(usersService.find(id));
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+				     .path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

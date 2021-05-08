@@ -1,107 +1,99 @@
 package com.lucas.desafio.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "tb_users")
-public class User {
-	
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	
+
 	@Column(unique = true)
 	private String email;
-	
+
 	@Column(unique = true)
 	private String cpf;
-	
-	private LocalDate  dataDeNacimento;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Endereco> enderecos = new ArrayList<>() ;
-	
-	
-	public User() {		
-	}
-	
 
-	public User(Long id, String nome, String email, String cpf, LocalDate dataDeNacimento, List<Endereco> enderecos) {
-		super();
+	private LocalDate dataDeNacimento;
+
+	
+	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.EAGER)		
+	private Set<Endereco> enderecos = new HashSet<>();
+
+	public User() {
+	}
+
+	public User(Long id, String nome, String email, String cpf, LocalDate dataDeNacimento) {		
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
-		this.dataDeNacimento = dataDeNacimento;
-		this.enderecos = enderecos;
+		this.dataDeNacimento = dataDeNacimento;		
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getCpf() {
 		return cpf;
 	}
 
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 
 	public LocalDate getDataDeNacimento() {
 		return dataDeNacimento;
 	}
 
-
 	public void setDataDeNacimento(LocalDate dataDeNacimento) {
 		this.dataDeNacimento = dataDeNacimento;
 	}
 
-	public List<Endereco> getEnderecos() {
+	public Set<Endereco> getEnderecos() {
 		return enderecos;
 	}
-	
-	
-	
+
+	public void setEnderecos(Set<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}	
 }

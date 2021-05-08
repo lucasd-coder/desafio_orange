@@ -3,16 +3,29 @@ package com.lucas.desafio.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import com.lucas.desafio.entities.User;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
+import com.lucas.desafio.entities.User;
+import com.lucas.desafio.service.validation.CreateUser;
+
+@CreateUser
 public class UserDTO implements Serializable {
 		
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
 	private String nome;
+	
+	@NotEmpty(message="Preenchimento obrigatório")
+	@Email(message="Email inválido")
 	private String email;
+	
+	@NotEmpty(message="Preenchimento obrigatório")	
 	private String cpf;
+		
 	private LocalDate  dataDeNacimento;
 	
 	public UserDTO() {		
@@ -20,6 +33,7 @@ public class UserDTO implements Serializable {
 
 	public UserDTO(Long id, String nome, String email, String cpf, LocalDate dataDeNacimento) {		
 		this.id = id;
+		
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
