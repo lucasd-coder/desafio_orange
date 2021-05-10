@@ -1,6 +1,7 @@
 package com.lucas.desafio.controllers.exceptions;
 
 import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -63,5 +64,10 @@ public class ControllerExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 	}
 
-	
+	@ExceptionHandler(NoSuchElementException.class) 
+	public ResponseEntity<StandardError> dataInvalidNull(NoSuchElementException e, HttpServletRequest request) {
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "não encontrado", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	}
+
 }

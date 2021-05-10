@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.lucas.desafio.controllers.exceptions.FieldMessage;
 import com.lucas.desafio.dto.UserDTO;
 import com.lucas.desafio.entities.User;
-import com.lucas.desafio.repositories.UsersRepository;
+import com.lucas.desafio.repositories.UserRepository;
 import com.lucas.desafio.service.validation.utils.BR;
 
 public class CreateUserValidation implements ConstraintValidator<CreateUser, UserDTO> {
 	
 	@Autowired
-	private UsersRepository repository;
+	private UserRepository repository;
 	
 	@Override
 	public void initialize(CreateUser ann) {		
@@ -26,9 +26,7 @@ public class CreateUserValidation implements ConstraintValidator<CreateUser, Use
 	@Override
 	public boolean isValid(UserDTO objDto, ConstraintValidatorContext context) {
 		
-		List<FieldMessage> list = new ArrayList<>();
-		
-		
+		List<FieldMessage> list = new ArrayList<>();				
 		if (!BR.isValidCPF(objDto.getCpf())) {
 			list.add(new FieldMessage("cpf", "campo CPF inválido"));
 		}

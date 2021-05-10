@@ -1,6 +1,5 @@
 package com.lucas.desafio.controllers;
 
-
 import java.net.URI;
 
 import javax.validation.Valid;
@@ -16,16 +15,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.lucas.desafio.dto.UserDTO;
 import com.lucas.desafio.entities.User;
-import com.lucas.desafio.service.UsersService;
-
+import com.lucas.desafio.service.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UsersController {
-	
-	
+public class UserController {
+		
 	@Autowired
-	private UsersService service;
+	private UserService service;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<User> find(@PathVariable Long id) {

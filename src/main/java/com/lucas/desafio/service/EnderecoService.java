@@ -11,17 +11,13 @@ import com.lucas.desafio.repositories.EnderecoRepository;
 public class EnderecoService {
 		
 	@Autowired
-	private EnderecoRepository repository;
-			
-	
+	private EnderecoRepository repository;				
 	public Endereco insert(Endereco obj) {
 		obj.setId(null);		
 		obj = repository.save(obj);
 		
-		return obj;
-		
-	}
-	
+		return obj;		
+	}	
 	public Endereco fromDTO(EnderecoDTO objDto) {
 		return new Endereco(objDto.getId(), objDto.getLogradouro(), objDto.getNumero(), 
 				objDto.getComplemento(), objDto.getBairro(), 

@@ -1,6 +1,5 @@
 package com.lucas.desafio.dto;
 
-
 import java.io.Serializable;
 
 import javax.validation.constraints.NotEmpty;
@@ -9,8 +8,7 @@ import com.lucas.desafio.entities.Endereco;
 import com.lucas.desafio.service.validation.CreateEnderecoUser;
 
 @CreateEnderecoUser
-public class EnderecoDTO implements Serializable {
-	
+public class EnderecoDTO implements Serializable {	
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -33,18 +31,13 @@ public class EnderecoDTO implements Serializable {
 	private String estado;
 	
 	@NotEmpty(message="Preenchimento obrigatório")
-	private String cep;
-	
-	
+	private String cep;		
 	private UserDTO user;
 	
-	public EnderecoDTO() {
-		
+	public EnderecoDTO() {		
 	}
-
 	public EnderecoDTO(Long id, String logradouro, Integer numero, String complemento, String bairro, String cidade,
-			String estado, String cep, UserDTO user) {
-		
+			String estado, String cep, UserDTO user) {		
 		this.id = id;		
 		this.logradouro = logradouro;
 		this.numero = numero;
@@ -69,6 +62,9 @@ public class EnderecoDTO implements Serializable {
 		user = new UserDTO(entity.getUser());
 	}
 
+	 //getters e setters
+	
+	//}
 	public Long getId() {
 		return id;
 	}

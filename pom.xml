@@ -12,7 +12,7 @@
 	<groupId>com.lucas</groupId>
 	<artifactId>desafio_zup</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>desafio_zup</name>
+	<name>desafio_zup_lucas</name>
 	<description>Desafio Zup</description>
 	<properties>
 		<java.version>11</java.version>

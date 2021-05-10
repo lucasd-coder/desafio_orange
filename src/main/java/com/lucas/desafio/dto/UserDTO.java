@@ -10,8 +10,7 @@ import com.lucas.desafio.entities.User;
 import com.lucas.desafio.service.validation.CreateUser;
 
 @CreateUser
-public class UserDTO implements Serializable {
-		
+public class UserDTO implements Serializable {		
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
@@ -24,8 +23,7 @@ public class UserDTO implements Serializable {
 	private String email;
 	
 	@NotEmpty(message="Preenchimento obrigatório")	
-	private String cpf;
-		
+	private String cpf;		
 	private LocalDate  dataDeNacimento;
 	
 	public UserDTO() {		
@@ -47,6 +45,11 @@ public class UserDTO implements Serializable {
 		cpf = entity.getCpf();
 		dataDeNacimento = entity.getDataDeNacimento();
 	}
+
+		//getters e setters
+	
+	//}
+
 
 	public Long getId() {
 		return id;

@@ -2,13 +2,12 @@ package com.lucas.desafio.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,29 +17,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tb_users")
 public class User implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-
 	@Column(unique = true)
 	private String email;
-
 	@Column(unique = true)
 	private String cpf;
-
 	private LocalDate dataDeNacimento;
-
 	
-	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.EAGER)		
-	private Set<Endereco> enderecos = new HashSet<>();
+	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)		
+	private List<Endereco> enderecos = new ArrayList<>();
 
 	public User() {
 	}
-
+	
 	public User(Long id, String nome, String email, String cpf, LocalDate dataDeNacimento) {		
 		this.id = id;
 		this.nome = nome;
@@ -49,6 +43,9 @@ public class User implements Serializable {
 		this.dataDeNacimento = dataDeNacimento;		
 	}
 
+	//getters e setters
+	
+	//}
 	public Long getId() {
 		return id;
 	}
@@ -89,11 +86,12 @@ public class User implements Serializable {
 		this.dataDeNacimento = dataDeNacimento;
 	}
 
-	public Set<Endereco> getEnderecos() {
+	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}
 
-	public void setEnderecos(Set<Endereco> enderecos) {
+	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}	
+
 }
